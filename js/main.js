@@ -10,11 +10,9 @@
         }, 1);
     };
     spinner(0);
-    
-    
+
     // Initiate the wowjs
     new WOW().init();
-
 
     // Sticky Navbar
     $(window).scroll(function () {
@@ -24,7 +22,6 @@
             $('.nav-bar').removeClass('sticky-top shadow-sm');
         }
     });
-
 
     // Hero Header carousel
     $(".header-carousel").owlCarousel({
@@ -42,7 +39,6 @@
         ]
     });
 
-
     // ProductList carousel
     $(".productList-carousel").owlCarousel({
         autoplay: true,
@@ -57,21 +53,11 @@
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:2
-            },
-            1200:{
-                items:3
-            }
+            0:{ items:1 },
+            576:{ items:1 },
+            768:{ items:2 },
+            992:{ items:2 },
+            1200:{ items:3 }
         }
     });
 
@@ -90,7 +76,6 @@
         ]
     });
 
-
     // Single Products carousel
     $(".single-carousel").owlCarousel({
         autoplay: true,
@@ -106,8 +91,7 @@
         ]
     });
 
-
-    // ProductList carousel
+    // Related carousel
     $(".related-carousel").owlCarousel({
         autoplay: true,
         smartSpeed: 1500,
@@ -121,143 +105,190 @@
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:3
-            },
-            1200:{
-                items:4
-            }
+            0:{ items:1 },
+            576:{ items:1 },
+            768:{ items:2 },
+            992:{ items:3 },
+            1200:{ items:4 }
         }
     });
-
-
 
     // Product Quantity
     $('.quantity button').on('click', function () {
         var button = $(this);
         var oldValue = button.parent().parent().find('input').val();
-        if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
+        var newVal = button.hasClass('btn-plus')
+            ? parseFloat(oldValue) + 1
+            : Math.max(parseFloat(oldValue) - 1, 0);
+
         button.parent().parent().find('input').val(newVal);
     });
 
-
-    
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
-    }
+    // Back to top
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
     });
+
     $('.back-to-top').click(function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
     });
 
-
-   
-
 })(jQuery);
 
-function mascara(m,t,e){
-  var cursor = t.selectionStart;
-  var texto = t.value;
-  texto = texto.replace(/\D/g,'');
-  var l = texto.length;
-  var lm = m.length;
-  if(window.event) {                  
-     id = e.keyCode;
-  } else if(e.which){                 
-     id = e.which;
-  }
-  cursorfixo=false;
-  if(cursor < l)cursorfixo=true;
-  var livre = false;
-  if(id == 16 || id == 19 || (id >= 33 && id <= 40))livre = true;
-  ii=0;
-  mm=0;
-  if(!livre){
-     if(id!=8){
-        t.value="";
-        j=0;
-        for(i=0;i<lm;i++){
-           if(m.substr(i,1)=="#"){
-              t.value+=texto.substr(j,1);
-              j++;
-           }else if(m.substr(i,1)!="#"){
-                    t.value+=m.substr(i,1);
-                  }
-                  if(id!=8 && !cursorfixo)cursor++;
-                  if((j)==l+1)break;
-                      
-        } 	
-     }
-  }
-  if(cursorfixo && !livre)cursor--;
-    t.setSelectionRange(cursor, cursor);
-}
-    
-const btnFinalizar = document.getElementById("btnFinalizar");
-if (btnFinalizar) {
-  btnFinalizar.addEventListener("click", function () {
-    const campos = document.querySelectorAll("#checkoutForm input[required]");
-    let valido = true;
+/*
+    VALIDAÇÕES CHECKOUT
+*/
 
-    campos.forEach(campo => {
-      const erroMsg = document.getElementById("erro-" + campo.id);
-      if (campo.value.trim() === "") {
-        campo.style.border = "2px solid red";
-        erroMsg.textContent = "Preencha este campo obrigatório.";
-        valido = false;
-      } else {
-        campo.style.border = "";
-        erroMsg.textContent = "";
-      }
+// Regex
+const regexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+const regexCep = /^\d{5}-\d{3}$/;
+const regexCel = /^\(\d{2}\)\s\d{5}-\d{4}$/;
+const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const regexCartao = /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/;
+const regexValidade = /^(0[1-9]|1[0-2])\/\d{2}$/;
+const regexCVV = /^\d{3}$/;
+
+// Aplica máscara simples
+function mask(input, type) {
+    let v = input.value.replace(/\D/g, "");
+
+    if (type === "cpf") {
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d{2})$/, "$1-$2");
+    }
+
+    else if (type === "cep") {
+        v = v.replace(/(\d{5})(\d)/, "$1-$2");
+    }
+
+    else if (type === "cel") {
+        v = v.replace(/(\d{2})(\d)/, "($1) $2");
+        v = v.replace(/(\d{5})(\d{4})$/, "$1-$2");
+    }
+
+    else if (type === "cartao") {
+        v = v.replace(/(\d{4})(?=\d)/g, "$1 ");
+        v = v.substring(0, 19); // 16 dígitos + 3 espaços
+    }
+
+    else if (type === "validade") {
+        v = v.replace(/(\d{2})(\d{1,2})/, "$1/$2");
+        v = v.substring(0, 5);
+    }
+
+    else if (type === "cvv") {
+        v = v.substring(0, 3);
+    }
+
+    input.value = v;
+}
+
+function setupMasks() {
+    const masks = {
+        cpf: "cpf",
+        cep: "cep",
+        celular: "cel",
+        numeroCartao: "cartao",
+        validade: "validade",
+        CVV: "cvv"
+    };
+
+Object.keys(masks).forEach(id => {
+        const field = document.getElementById(id);
+        if (field) {
+            field.addEventListener("input", e => {
+                 mask(field, masks[id]);
+            });
+        }
     });
-
-    if (valido) alert("Pedido finalizado com sucesso!");
-  });
 }
+setupMasks();
+
+function fieldError(input, message) {
+    input.classList.remove("is-valid");
+    input.classList.add("is-invalid");
+    document.getElementById("erro-" + input.id).textContent = message;
+}
+
+function fieldValid(input) {
+    input.classList.remove("is-invalid");
+    input.classList.add("is-valid");
+    document.getElementById("erro-" + input.id).textContent = "";
+}
+
+function validarCheckout() {
+    let ok = true;
+
+    function check(id, validatorFn, message) {
+        const el = document.getElementById(id);
+        if (!validatorFn(el.value.trim())) {
+            fieldError(el, message);
+            ok = false;
+        } else {
+            fieldValid(el);
+        }
+    }
+
+    check("nome", v => v.length > 1, "Informe seu nome.");
+    check("sobrenome", v => v.length > 1, "Informe seu sobrenome.");
+    check("cpf", v => regexCpf.test(v), "CPF inválido.");
+    check("endereco", v => v.length > 5, "Informe seu endereço.");
+    check("cep", v => regexCep.test(v), "CEP inválido.");
+    check("celular", v => regexCel.test(v), "Celular inválido.");
+    check("email", v => regexEmail.test(v), "Email inválido.");
+    check("numeroCartao", v => regexCartao.test(v), "Número inválido.");
+    check("nomeCartao", v => v.length > 3, "Nome inválido.");
+    check("validade", v => regexValidade.test(v), "MM/AA inválido.");
+    check("CVV", v => regexCVV.test(v), "CVV inválido.");
+
+    return ok;
+}
+
+// Botão finalizar
+const btnFinalizar = document.getElementById("btnFinalizar");
+
+if (btnFinalizar) {
+    btnFinalizar.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (validarCheckout()) {
+            alert("Pedido finalizado com sucesso!");
+            document.getElementById("checkoutForm").reset();
+        }
+    });
+}
+
+/* 
+    CONTATO 
+*/
 
 const btnEnviar = document.getElementById("btnEnviar");
 if (btnEnviar) {
-  btnEnviar.addEventListener("click", function () {
-    const campos = document.querySelectorAll("#formContato input[required], #formContato textarea[required]");
-    let valido = true;
+    btnEnviar.addEventListener("click", function () {
+        const campos = document.querySelectorAll("#formContato input[required], #formContato textarea[required]");
+        let valido = true;
 
-    campos.forEach(campo => {
-      const erro = document.getElementById("erro-" + campo.id);
-      if (campo.value.trim() === "") {
-        campo.style.border = "2px solid red";
-        erro.textContent = "Preencha este campo obrigatório.";
-        valido = false;
-      } else {
-        campo.style.border = "";
-        erro.textContent = "";
-      }
+        campos.forEach(campo => {
+            const erro = document.getElementById("erro-" + campo.id);
+            if (campo.value.trim() === "") {
+                campo.style.border = "2px solid red";
+                erro.textContent = "Preencha este campo obrigatório.";
+                valido = false;
+            } else {
+                campo.style.border = "";
+                erro.textContent = "";
+            }
+        });
+
+        if (valido) {
+            alert("Mensagem enviada com sucesso!");
+            document.getElementById("formContato").reset();
+        }
     });
-
-    if (valido) {
-      alert("Mensagem enviada com sucesso!");
-      document.getElementById("formContato").reset();
-    }
-  });
 }
+
