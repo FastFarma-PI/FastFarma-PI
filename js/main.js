@@ -245,7 +245,7 @@ function validarCheckout() {
     check("numeroCartao", v => regexCartao.test(v), "Número inválido.");
     check("nomeCartao", v => v.length > 3, "Nome inválido.");
     check("validade", v => regexValidade.test(v), "MM/AA inválido.");
-    check("CVV", v => regexCVV.test(v), "CVV inválido.");
+    check("cvv", v => regexCVV.test(v), "CVV inválido.");
 
     return ok;
 }
