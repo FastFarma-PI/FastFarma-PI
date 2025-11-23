@@ -246,6 +246,8 @@ function validarCheckout() {
     check("nomeCartao", v => v.length > 3, "Nome inválido.");
     check("validade", v => regexValidade.test(v), "MM/AA inválido.");
     check("cvv", v => regexCVV.test(v), "CVV inválido.");
+    check("complemento", v => v.length > 0, "Informe o complemento.");
+    check("aniv", v => v !== "", "Informe a data de aniversário.");
 
     return ok;
 }
@@ -266,7 +268,6 @@ if (btnFinalizar) {
 /* 
     CONTATO 
 */
-
 const btnEnviar = document.getElementById("btnEnviar");
 if (btnEnviar) {
     btnEnviar.addEventListener("click", function () {
@@ -292,3 +293,13 @@ if (btnEnviar) {
     });
 }
 
+//// TABLE
+var botaoExcluir=document.getElementById('botaoExcluir');
+if (botaoExcluir){
+    botaoExcluir.addEventListener('click', function(){
+        var checks= document.querySelectorAll('.itemExcluir:checked');
+        checks.forEach(function(check){
+            check.closest('tr').remove();
+        });
+    });
+}
