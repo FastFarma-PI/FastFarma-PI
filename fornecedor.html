@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FastFarma - Farmácia Virtual</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Carregando...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid px-5 d-none border-bottom d-lg-block">
+        <div class="row gx-0 align-items-center">
+            <div class="col-lg-4 text-center text-lg-start mb-lg-0">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <a href="#" class="text-muted me-2"> Ajuda</a><small> / </small>
+                    <a href="#" class="text-muted mx-2"> Suporte</a><small> / </small>
+                    <a href="#" class="text-muted ms-2"> Contato</a>
+
+                </div>
+            </div>
+            <div class="col-lg-4 text-center d-flex align-items-center justify-content-center">
+                <small class="text-dark">Call Us:</small>
+                <a href="#" class="text-muted">(+012) 1234 567890</a>
+            </div>
+            <div class="col-lg-4 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle text-muted me-2" data-bs-toggle="dropdown"><small>
+                                Reais</small></a>
+                        <div class="dropdown-menu rounded">
+                            <a href="#" class="dropdown-item"> Euro</a>
+                            <a href="#" class="dropdown-item"> Dolar</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown"><small>
+                                Portugues</small></a>
+                        <div class="dropdown-menu rounded">
+                            <a href="#" class="dropdown-item"> English</a>
+                            <a href="#" class="dropdown-item"> Turkish</a>
+                            <a href="#" class="dropdown-item"> Spanol</a>
+                            <a href="#" class="dropdown-item"> Italiano</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
+                                    class="fa fa-home me-2"></i> My Dashboard</small></a>
+                        <div class="dropdown-menu rounded">
+                            <a href="#" class="dropdown-item"> Login</a>
+                            <a href="#" class="dropdown-item"> Favoritos</a>
+                            <a href="#" class="dropdown-item"> Notificações</a>
+                            <a href="#" class="dropdown-item"> Configurações</a>
+                            <a href="#" class="dropdown-item"> Minha conta</a>
+                            <a href="#" class="dropdown-item"> Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-5 py-4 d-none d-lg-block">
+        <div class="row gx-0 align-items-center text-center">
+            <div class="col-md-4 col-lg-3 text-center text-lg-start">
+                <div class="d-inline-flex align-items-center">
+                    <a href="index.html" class="navbar-brand p-0">
+                        <h1 class="display-5 text-primary m-0"></h1>
+                        <img src="img/logofast.png" alt="FastFarma">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-6 text-center">
+                <div class="position-relative ps-4">
+                    <div class="d-flex border rounded-pill">
+                        <input class="form-control border-0 rounded-pill w-100 py-3" type="text"
+                            data-bs-target="#dropdownToggle123" placeholder="O que procura?">
+                        <select class="form-select text-dark border-0 border-start rounded-0 p-3" style="width: 200px;">
+                            <option value="All Category">Categorias</option>
+                            <option value="Pest Control-2">Higiene</option>
+                            <option value="Pest Control-3">Medicamentos</option>
+                            <option value="Pest Control-4">Mamãe e Bebê</option>
+                        </select>
+                        <button type="button" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center">
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
+                            class="rounded-circle btn-md-square border"><i class="fas fa-random"></i></i></a>
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
+                            class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></a>
+                    <a href="cart.html" class="text-muted d-flex align-items-center justify-content-center"><span
+                            class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart"></i></span>
+                        <span class="text-dark ms-2">R$100.00</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar p-0">
+        <div class="row gx-0 bg-primary px-5 align-items-center">
+            <div class="col-lg-3 d-none d-lg-block">
+                <nav class="navbar navbar-light position-relative" style="width: 250px;">
+                </nav>
+            </div>
+            <div class="col-12 col-lg-9">
+                <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars fa-1x"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto py-0">
+                            <a href="index.html" class="nav-item nav-link">Home</a>
+                            <a href="shop.html" class="nav-item nav-link">Produtos</a>
+                            <a href="single.html" class="nav-item nav-link">Produto</a>
+                            <a href="contact.html" class="nav-item nav-link me-2">Contato</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+
+    <!-- Searvices Start -->
+    <div class="container-fluid px-0">
+        <div class="row g-0">
+            <div class="col-6 col-md-4 col-lg-2 border-start border-end wow fadeInUp" data-wow-delay="0.1s">
+                <div class="p-4">
+                    <div class="d-inline-flex align-items-center">
+                        <i class="fa fa-sync-alt fa-2x text-primary"></i>
+                        <div class="ms-4">
+                            <h6 class="text-uppercase mb-2">Devolução Gratis</h6>
+                            <p class="mb-0">Seu dinheiro de volta em 30 dias!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.2s">
+                <div class="p-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fab fa-telegram-plane fa-2x text-primary"></i>
+                        <div class="ms-4">
+                            <h6 class="text-uppercase mb-2">Frete Grátis</h6>
+                            <p class="mb-0">Frete grátis na sua primeira compra</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.3s">
+                <div class="p-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-life-ring fa-2x text-primary"></i>
+                        <div class="ms-4">
+                            <h6 class="text-uppercase mb-2">Suporte 24/7</h6>
+                            <p class="mb-0">Suporte online 24hrs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.4s">
+                <div class="p-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-credit-card fa-2x text-primary"></i>
+                        <div class="ms-4">
+                            <h6 class="text-uppercase mb-2">Receba Cupons</h6>
+                            <p class="mb-0">Receba cupons de até R$50</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.5s">
+                <div class="p-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-lock fa-2x text-primary"></i>
+                        <div class="ms-4">
+                            <h6 class="text-uppercase mb-2">Pagamento Seguro</h6>
+                            <p class="mb-0">Nos importamos com sua segurança</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.6s">
+                <div class="p-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-blog fa-2x text-primary"></i>
+                        <div class="ms-4">
+                            <h6 class="text-uppercase mb-2">Serviço Online</h6>
+                            <p class="mb-0">Devolução grátis em até 30 dias</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Searvices End -->
+
+
+    <!-- Checkout Page Start -->
+
+<div class="container-fluid bg-light overflow-hidden py-5">
+    <div class="container py-5">
+        <h1 class="mb-4 wow fadeInUp" data-wow-delay="0.1s">Cadastro de Fornecedor</h1>
+        <form id="checkoutForm" novalidate>
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                    <div class="form-item w-100">
+                        <label for="nome" class="form-label my-3">Código<sup>*</sup></label>
+                        <input type="text" id="nome" class="form-control" required>
+                        <div class="text-danger small" id="erro-nome"></div>
+                    </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                    <div class="form-item w-100">
+                        <label for="sobrenome" class="form-label my-3">Nome Fantasia<sup>*</sup></label>
+                        <input type="text" id="sobrenome" class="form-control" required>
+                        <div class="text-danger small" id="erro-sobrenome"></div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <label for="aniv" class="form-label my-3">Aniversário <sup>*</sup></label>
+                    <input type="date" id="aniv" class="form-control" required>
+                    <div class="text-danger small" id="erro-aniv"></div>
+                </div>
+
+                <div class="form-item">
+                    <label for="cnpj" class="form-label my-3">CNPJ</label>
+                    <input type="text" id="cnpj" class="form-control" placeholder="99.999.999/9999-99" maxlength="17">
+                    <div class="text-danger small" id="erro-cnpj"></div>
+                </div>
+
+                <div class="form-item">
+                    <label for="endereco" class="form-label my-3">Endereço<sup>*</sup></label>
+                    <input type="text" id="endereco" class="form-control" required>
+                    <div class="text-danger small" id="erro-endereco"></div>
+                </div>
+
+                <div class="form-item">
+                    <label for="complemento" class="form-label my-3">Complemento<sup>*</sup></label>
+                    <input type="text" id="complemento" class="form-control" placeholder="Apto 134, Bloco B" required>
+                    <div class="text-danger small" id="erro-complemento"></div>
+                </div>
+
+                <div class="form-item">
+                    <label for="cep" class="form-label my-3">CEP <sup>*</sup></label>
+                    <input type="text" id="cep" class="form-control" placeholder="99999-999" maxlength="9" required>
+                    <div class="text-danger small" id="erro-cep"></div>
+                </div>
+
+                <div class="form-item">
+                    <label for="celular" class="form-label my-3">Celular<sup>*</sup></label>
+                    <input type="text" id="celular" class="form-control" placeholder="(99) 99999-9999" maxlength="15" required>
+                    <div class="text-danger small" id="erro-celular"></div>
+                </div>
+
+                <div class="form-item">
+                    <label for="email" class="form-label my-3">E-mail<sup>*</sup></label>
+                    <input type="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
+                    <div class="text-danger small" id="erro-email"></div>
+                </div>
+
+                </div>
+
+                <div class="col-md-12 col-lg-6 col-xl-6 wow fadeInUp" data-wow-delay="0.3s"> 
+                    <table class="table">
+                        </table>
+                    <div class="table-responsive">
+                    </div>
+                    <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                        <button type="button" id="btnFinalizar" class="btn btn-primary border-secondary 
+                        py-3 px-4 text-uppercase w-100 text-white">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <!-- Checkout Page End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container py-5">
+            <div class="row g-4 rounded mb-5" style="background: rgba(255, 255, 255, .03);">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="rounded p-4">
+                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-4"
+                            style="width: 70px; height: 70px;">
+                            <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-light">Address</h4>
+                            <p class="mb-2 text-light">123 Street New York.USA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="rounded p-4">
+                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-4"
+                            style="width: 70px; height: 70px;">
+                            <i class="fas fa-envelope fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-light">Mail Us</h4>
+                            <p class="mb-2 text-light">info@example.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="rounded p-4">
+                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-4"
+                            style="width: 70px; height: 70px;">
+                            <i class="fa fa-phone-alt fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-light">Telephone</h4>
+                            <p class="mb-2 text-light">(+012) 3456 7890</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="rounded p-4">
+                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-4"
+                            style="width: 70px; height: 70px;">
+                            <i class="fab fa-firefox-browser fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-light">Yoursite@ex.com</h4>
+                            <p class="mb-2 text-light">(+012) 3456 7890</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <div class="footer-item">
+                            <h4 class="text-primary mb-4">Newsletter</h4>
+                            <p class="mb-3 text-light">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit
+                                amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
+                            <div class="position-relative mx-auto rounded-pill">
+                                <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                                    placeholder="Enter your email">
+                                <button type="button"
+                                    class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="text-primary mb-4">Customer Service</h4>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Returns</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Order History</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Site Map</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Testimonials</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> My Account</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Unsubscribe Notification</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="text-primary mb-4">Information</h4>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> About Us</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Delivery infomation</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Warranty</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> FAQ</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Seller Login</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="text-primary mb-4">Extras</h4>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Brands</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Gift Vouchers</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Affiliates</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Wishlist</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Order History</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Track Your Order</a>
+                        <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Track Your Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/fornecedor.js"></script>
+</body>
+
+</html>
