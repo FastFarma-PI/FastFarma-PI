@@ -161,16 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // validação entre token da senha
             const user = users.find(u => u.email === email && u.password === btoa(password));
 
-            if (email === "admin@fastfarma.com" && password === "admin") {
-            const token = generateToken({ email: "admin", role: "admin" });
-            localStorage.setItem('fastfarma_token', token);
-            showToast("Bem-vindo, administrador!", "success");
-            setTimeout(() => {
-                window.location.href = 'gerenciamento.html';
-            }, 1000);
-            return;
-            }
-
             if (user) {
                 
                 const token = generateToken({ email: user.email, role: 'user' });
