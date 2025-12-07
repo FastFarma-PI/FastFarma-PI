@@ -145,13 +145,80 @@
 */
 
 // Regex
-const regexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 const regexCep = /^\d{5}-\d{3}$/;
 const regexCel = /^\(\d{2}\)\s\d{5}-\d{4}$/;
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const regexCartao = /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/;
 const regexValidade = /^(0[1-9]|1[0-2])\/\d{2}$/;
 const regexCVV = /^\d{3}$/;
+
+// Validações
+function validarData(valor) {
+    if (valor == "") return false;
+
+    // Converte a data (o T00:00:00 corrige o dia errado)
+    let aniversario = new Date(valor + "T00:00:00");
+    let hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    // Calcula a data limite (18 anos atrás)
+    let dataLimite = new Date();
+    dataLimite.setFullYear(hoje.getFullYear() - 18);
+    dataLimite.setHours(0, 0, 0, 0);
+
+    // Se o aniversário for depois do limite, é menor de idade
+    if (aniversario > dataLimite) {
+        return false;
+    }
+    return true;
+}
+
+function validarCPF(cpf) {
+   var ok = 1;
+   var add;
+   if (cpf != "") {
+      cpf = cpf.replace(/[^\d]+/g, '');
+      if (cpf.length != 11 ||
+         cpf == "00000000000" ||
+         cpf == "11111111111" ||
+         cpf == "22222222222" ||
+         cpf == "33333333333" ||
+         cpf == "44444444444" ||
+         cpf == "55555555555" ||
+         cpf == "66666666666" ||
+         cpf == "77777777777" ||
+         cpf == "88888888888" ||
+         cpf == "99999999999")
+             ok = 0;
+
+      if (ok == 1) {
+         add = 0;
+         for (var i = 0; i < 9; i++)
+            add += parseInt(cpf.charAt(i)) * (10 - i);
+            var rev = 11 - (add % 11);
+            if (rev == 10 || rev == 11)
+               rev = 0;
+            if (rev != parseInt(cpf.charAt(9)))
+               ok = 0;
+            if (ok == 1) {
+               add = 0;
+               for (var i = 0; i < 10; i++)
+                  add += parseInt(cpf.charAt(i)) * (11 - i);
+               rev = 11 - (add % 11);
+               if (rev == 10 || rev == 11)
+                  rev = 0;
+               if (rev != parseInt(cpf.charAt(10)))
+                  ok = 0;
+            }
+        }
+        if (ok == 0) {
+           return false;
+        } else {
+           return true;
+        }
+    }
+    return false;
+}
 
 // Aplica máscara simples
 function mask(input, type) {
@@ -161,6 +228,13 @@ function mask(input, type) {
         v = v.replace(/(\d{3})(\d)/, "$1.$2");
         v = v.replace(/(\d{3})(\d)/, "$1.$2");
         v = v.replace(/(\d{3})(\d{2})$/, "$1-$2");
+    }
+
+    else if (type === "cnpj") {
+        v = v.replace(/(\d{2})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1/$2");
+        v = v.replace(/(\d{4})(\d{2})$/, "$1-$2");
     }
 
     else if (type === "cep") {
@@ -192,6 +266,7 @@ function mask(input, type) {
 function setupMasks() {
     const masks = {
         cpf: "cpf",
+        cnpj: "cnpj",
         cep: "cep",
         celular: "cel",
         numeroCartao: "cartao",
@@ -237,7 +312,7 @@ function validarCheckout() {
 
     check("nome", v => v.length > 1, "Informe seu nome.");
     check("sobrenome", v => v.length > 1, "Informe seu sobrenome.");
-    check("cpf", v => regexCpf.test(v), "CPF inválido.");
+    check("cpf", v => validarCPF(v), "CPF inválido.");
     check("endereco", v => v.length > 5, "Informe seu endereço.");
     check("cep", v => regexCep.test(v), "CEP inválido.");
     check("celular", v => regexCel.test(v), "Celular inválido.");
@@ -247,7 +322,7 @@ function validarCheckout() {
     check("validade", v => regexValidade.test(v), "MM/AA inválido.");
     check("cvv", v => regexCVV.test(v), "CVV inválido.");
     check("complemento", v => v.length > 0, "Informe o complemento.");
-    check("aniv", v => v !== "", "Informe a data de aniversário.");
+    check("aniv", v => validarData(v), "Data inválida. Deve ser maior de 18 anos.");
 
     return ok;
 }

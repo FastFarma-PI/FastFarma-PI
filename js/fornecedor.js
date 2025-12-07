@@ -146,6 +146,27 @@ const regexCel = /^\(\d{2}\)\s\d{5}-\d{4}$/;
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const regexCNPJ = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
 
+// Validações
+function validarData(valor) {
+    if (valor == "") return false;
+
+    // Converte a data (o T00:00:00 corrige o dia errado)
+    let aniversario = new Date(valor + "T00:00:00");
+    let hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    // Calcula a data limite (18 anos atrás)
+    let dataLimite = new Date();
+    dataLimite.setFullYear(hoje.getFullYear() - 18);
+    dataLimite.setHours(0, 0, 0, 0);
+
+    // Se o aniversário for depois do limite, é menor de idade
+    if (aniversario > dataLimite) {
+        return false;
+    }
+    return true;
+}
+
 // Máscaras
 function mask(input, type) {
     let v = input.value.replace(/\D/g, "");
@@ -218,15 +239,14 @@ function validarCheckout() {
     check("sobrenome", v => v.length > 1, "Informe o nome fantasia.");
     check("endereco", v => v.length > 5, "Informe seu endereço.");
     check("complemento", v => v.length > 0, "Informe o complemento.");
-    check("aniv", v => v !== "", "Informe a data de aniversário.");
+    check("aniv", v => validarData(v), "Data inválida. Deve ser maior de 18 anos.");
 
     // regex
     check("cep", v => regexCep.test(v), "CEP inválido.");
     check("celular", v => regexCel.test(v), "Celular inválido.");
     check("email", v => regexEmail.test(v), "Email inválido.");
     check("cnpj", v => regexCNPJ.test(v), "CNPJ inválido.");
-
-
+    
     return ok;
 }
 
